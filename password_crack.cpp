@@ -16,17 +16,26 @@ Algorithms: Brute Force
  */
 
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
 
 using namespace std;
 
+int generate_num_pw(int length);
+
 int main() {
-    
+
+    srand(time(NULL));
+
+    for(int i = 0; i < 50; i++) {
+        cout << generate_num_pw(10000) << endl;
+    }
 }
 
 //generate password using random number generator
 //all numbers, length 4 
-int generate_num_pw(int seed, int length) {
-    
+int generate_num_pw(int length) {
+    return rand()%length + 1000;
 }
 
 //brute force algorithm 
