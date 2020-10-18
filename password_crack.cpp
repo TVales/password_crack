@@ -21,21 +21,47 @@ Algorithms: Brute Force
 
 using namespace std;
 
-int generate_num_pw(int length);
+int *generate_num_pw(int length);
 
 int main() {
 
     srand(time(NULL));
 
-    for(int i = 0; i < 50; i++) {
-        cout << generate_num_pw(10000) << endl;
+    int *new_password = generate_num_pw(4); //generate_num_pw returns pointer to array created in function
+    int val;
+
+    for(int i = 0; i < 4; i++){
+        val = new_password[i];
+        cout << val << endl;
     }
+
+
+    //this only works with 4 length passwords
+    if(val > 9999){
+        val /= 10;
+    } 
+    else if (val < 1000) {
+        val *= 10;
+    }
+
+    cout << val << endl;
+    
+    return 0;
 }
 
-//generate password using random number generator
 //all numbers, length 4 
-int generate_num_pw(int length) {
-    return rand()%length + 1000;
+//given a length, return array pointer with random values created by rand
+int *generate_num_pw(int length) {
+    int* pw_arr = new int[length]; //create pointer within function so that you can return it. If used normal array instantiation, it is destroyed after fn because of scope. 
+
+    for(int i = 0; i < length; i++){
+        pw_arr[i] = rand()%length;
+    }
+
+    return pw_arr;
 }
+
+//is valid password
+//given array and length, return bool if password is valid length
 
 //brute force algorithm 
