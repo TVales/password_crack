@@ -15,9 +15,10 @@ Algorithms: Brute Force
             Multithreading?  
  */
 
-#include <iostream>
-#include <stdlib.h>
-#include <time.h>
+#include <iostream> //cout 
+#include <sstream> //array to string 
+#include <stdlib.h> 
+#include <time.h> //seed for rng
 
 using namespace std;
 
@@ -28,23 +29,24 @@ int main() {
     srand(time(NULL));
 
     int *new_password = generate_num_pw(4); //generate_num_pw returns pointer to array created in function
-    int val;
+    stringstream val; 
+    int result;
 
     for(int i = 0; i < 4; i++){
-        val = new_password[i];
-        cout << val << endl;
+        val << new_password[i]; //val takes in ints from ayya and converts to string 
     }
 
+    val >> result; //val converted to int
 
     //this only works with 4 length passwords
-    if(val > 9999){
-        val /= 10;
+    if(result > 9999){
+        result /= 10;
     } 
-    else if (val < 1000) {
-        val *= 10;
-    }
+    else if (result < 1000) {
+        result *= 10;
+    } 
 
-    cout << val << endl;
+    cout << result << endl;
     
     return 0;
 }
@@ -55,7 +57,7 @@ int *generate_num_pw(int length) {
     int* pw_arr = new int[length]; //create pointer within function so that you can return it. If used normal array instantiation, it is destroyed after fn because of scope. 
 
     for(int i = 0; i < length; i++){
-        pw_arr[i] = rand()%length;
+        pw_arr[i] = rand() % 10 + 1;
     }
 
     return pw_arr;
@@ -65,3 +67,4 @@ int *generate_num_pw(int length) {
 //given array and length, return bool if password is valid length
 
 //brute force algorithm 
+//given pw array, return time taken to crack pw 
