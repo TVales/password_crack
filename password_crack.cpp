@@ -17,7 +17,7 @@ Algorithms: Brute Force
 
 #include <iostream> //cout 
 #include <sstream> //array to string 
-#include <stdlib.h> 
+#include <stdlib.h> //srand and rand
 #include <time.h> //seed for rng
 
 using namespace std;
@@ -28,15 +28,15 @@ int main() {
 
     srand(time(NULL));
 
-    int *new_password = generate_num_pw(4); //generate_num_pw returns pointer to array created in function
-    stringstream val; 
+    int *new_password_arr = generate_num_pw(4); //generate_num_pw returns pointer to array created in function
+    stringstream int_to_string; 
     int result;
 
     for(int i = 0; i < 4; i++){
-        val << new_password[i]; //val takes in ints from ayya and converts to string 
+        int_to_string << new_password_arr[i]; //int_to_string takes in ints from ayya and converts to string 
     }
 
-    val >> result; //val converted to int
+    int_to_string >> result; //int_to_string converted to int to check value of array 
 
     //this only works with 4 length passwords
     if(result > 9999){
@@ -52,9 +52,9 @@ int main() {
 }
 
 //all numbers, length 4 
-//given a length, return array pointer with random values created by rand
+//given a length, return array pointer with random int_to_stringues created by rand
 int *generate_num_pw(int length) {
-    int* pw_arr = new int[length]; //create pointer within function so that you can return it. If used normal array instantiation, it is destroyed after fn because of scope. 
+    int* pw_arr = new int[length]; //create pointer to array within function so that you can return it. If used normal array instantiation, it is destroyed after fn because of scope. 
 
     for(int i = 0; i < length; i++){
         pw_arr[i] = rand() % 10 + 1;
@@ -62,9 +62,6 @@ int *generate_num_pw(int length) {
 
     return pw_arr;
 }
-
-//is valid password
-//given array and length, return bool if password is valid length
 
 //brute force algorithm 
 //given pw array, return time taken to crack pw 
