@@ -25,29 +25,32 @@ using namespace std;
 using namespace std::chrono;
 
 int *generate_num_pw(int length);
+void brute_force(int given_pw);
 
 int main() {
 
-    srand(time(NULL));
+    srand(time(NULL)); //seed rand function 
 
     int *new_password_arr = generate_num_pw(4); //generate_num_pw returns pointer to array created in function
     stringstream int_to_string; 
     int result;
-    auto start = high_resolution_clock::now();
-
+    
     for(int i = 0; i < 4; i++){
         int_to_string << new_password_arr[i]; //int_to_string takes in ints from ayya and converts to string 
     }
-
+    
     int_to_string >> result; //int_to_string converted to int to check value of array 
+
+    cout << "Random Password: " << result << endl;  
+    auto start = high_resolution_clock::now();
+
+    brute_force(result);
 
     auto end = high_resolution_clock::now();
 
-    cout << result << endl;  
-
     auto duration = duration_cast<microseconds>(end - start);
 
-    cout << duration.count() << endl;
+    cout << "Elapsed time in uSec " << duration.count() << endl;
     
     return 0;
 }
@@ -65,24 +68,14 @@ int *generate_num_pw(int length) {
 }
 
 //brute force algorithm 
-//given pw array, return time taken to crack pw 
-int *brute_force(int *pw_arr_bf) {
+//given pw array, return values every iteration
+void brute_force(int given_pw) {
     //iterate through every possible four integer permutation to find matching value in array
-    int *result = new int[4];
-    
-    for(int i = 0; i < 10; i++) {
-        if(i == pw_arr_bf[0]) {
-            result[0] = i;
-        } else if(i == pw_arr_bf[1]) {
-            result[1] = i;
+    for(int j = 0; j < 10000; j++) {
+        if(j == given_pw){
+            cout << "Pasword Cracked! - " << j << endl;
+            break;
         }
-        else if(i == pw_arr_bf[2]) {
-            result[2] = i;
-        }
-        else if(i == pw_arr_bf[3]) {
-            result[3] = i;
-        }
+        //cout << "Guess: " << j << endl;
     }
-
-    return result;
-}
+} 
